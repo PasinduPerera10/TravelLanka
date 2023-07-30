@@ -1,120 +1,131 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-const UpdateBeach = () => {
-  const [ad, setAd] = useState({
-    title: '',
-    description: '',
-    province: '',
-    district: ''
-  });
-
+const UpdateBeach = ({ match }) => {
   const { id } = useParams();
-  const navigate = useNavigate();
+  const [beach, setBeach] = useState(null);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [province, setProvince] = useState('');
+  const [district, setDistrict] = useState('');
+  const [category, setCategory] = useState('');
+  const [images, setImages] = useState([]);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  // const id = match.params.id;
 
   useEffect(() => {
     axios
       .get(`http://localhost:8060/beaches/beach/view/${id}`)
-      .then((res) => {
-        setAd({
-          title: res.data.title,
-          description: res.data.description,
-          province: res.data.province,
-          district: res.data.district
-        });
+      .then((response) => {
+        setBeach(response.data);
+        setTitle(response.data.title);
+        setDescription(response.data.description);
+        setProvince(response.data.province);
+        setDistrict(response.data.district);
+        setCategory(response.data.category);
+        setImages(response.data.images);
       })
-      .catch((err) => {
-        console.log('Unsucessfully');
+      .catch((error) => {
+        setErrorMessage('Error while fetching beach details.');
       });
   }, [id]);
 
-  const onChange = (e) => {
-    setAd({ ...ad, [e.target.name]: e.target.value });
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
   };
 
-  const onSubmit = (e) => {
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const handleProvinceChange = (e) => {
+    setProvince(e.target.value);
+  };
+
+  const handleDistrictChange = (e) => {
+    setDistrict(e.target.value);
+  };
+
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
+  };
+
+  const handleImageChange = (e) => {
+    // Handling multiple images
+    const files = Array.from(e.target.files);
+    setImages(files);
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const data = {
-      title: ad.title,
-      description: ad.description,
-      province: ad.province,
-      district: ad.district
-    };
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('province', province);
+    formData.append('district', district);
+    formData.append('category', category);
+
+    // Append each image to the form data
+    images.forEach((image, index) => {
+      formData.append(`images[${index}]`, image);
+    });
 
     axios
-      .put(`http://localhost:8060/beaches/beach/update/${id}`, data)
-      .then((res) => {
-        navigate(`/viewads-client`);
+      .put(`http://localhost:8060/beaches/beach/update/${id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       })
-      .catch((err) => {
-        console.log('Error in UpdateBookInfo!');
+      .then((response) => {
+        setSuccessMessage('Beach updated successfully!');
+        setErrorMessage('');
+      })
+      .catch((error) => {
+        setErrorMessage('Error while updating beach.');
+        setSuccessMessage('');
       });
   };
 
+  if (!beach) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="container" style={{marginLeft:"250px"}}>
-      <div className="max-w-md mx-auto">
-        <h1 className="text-3xl font-bold text-center mb-8">Update Ad</h1>
-        <form onSubmit={onSubmit}>
-          <div className="mb-4">
-            <label htmlFor="name" className="block text-gray-700 font-bold mb-2">title</label>
-            <input
-              type='text'
-              name='title'
-              id='title'
-              value={ad.title}
-              onChange={onChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="desc" className="block text-gray-700 font-bold mb-2">description</label>
-            <input
-              type='text'
-              name='description'
-              id='description'
-              value={ad.description}
-              onChange={onChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="name" className="block text-gray-700 font-bold mb-2">province</label>
-            <input
-              type='text'
-              name='province'
-              id='province'
-              value={ad.province}
-              onChange={onChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="desc" className="block text-gray-700 font-bold mb-2">district</label>
-            <input
-              type='text'
-              name='district'
-              id='district'
-              value={ad.district}
-              onChange={onChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
-
-          <div className="flex justify-center">
-            <button
-              type='submit'
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
-              Update
-            </button>
-          </div>
-        </form>
-      </div>
+    <div>
+      <h2>Update Beach</h2>
+      {successMessage && <div className="success">{successMessage}</div>}
+      {errorMessage && <div className="error">{errorMessage}</div>}
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Title:</label>
+          <input type="text" value={title} onChange={handleTitleChange} />
+        </div>
+        <div>
+          <label>Description:</label>
+          <textarea value={description} onChange={handleDescriptionChange} />
+        </div>
+        <div>
+          <label>Province:</label>
+          <input type="text" value={province} onChange={handleProvinceChange} />
+        </div>
+        <div>
+          <label>District:</label>
+          <input type="text" value={district} onChange={handleDistrictChange} />
+        </div>
+        <div>
+          <label>Category:</label>
+          <input type="text" value={category} onChange={handleCategoryChange} />
+        </div>
+        <div>
+          <label>Upload Images (up to 2):</label>
+          <input type="file" accept="image/*" multiple onChange={handleImageChange} />
+        </div>
+        <button type="submit">Update</button>
+      </form>
     </div>
   );
 };

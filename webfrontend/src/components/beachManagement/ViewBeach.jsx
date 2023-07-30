@@ -1,52 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import img1 from '../assests/image1.jpg'
 
-const ViewBeach = (props) => {
-  const [ad, setAd] = useState({});
-
+const ViewBeach = () => {
   const { id } = useParams();
+  const [beach, setBeach] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     axios
       .get(`http://localhost:8060/beaches/beach/view/${id}`)
-      .then((res) => {
-        setAd(res.data);
+      .then((response) => {
+        setBeach(response.data);
+        setLoading(false);
+        setError('');
       })
-      .catch((err) => {
-        console.log('Unsucessfully');
+      .catch((error) => {
+        setLoading(false);
+        setError('Error while fetching beach details.');
+        console.error("Error while fetching beach details:", error);
       });
   }, [id]);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (!beach) {
+    return <div>Beach not found</div>;
+  }
+
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', marginLeft:"250px" }}>
-      <div style={{ width: '80%', backgroundColor: '#f5f5f5', padding: '25px', borderRadius: '10px', boxShadow: '0px 5px 10px #d3d3d3' }}>
-        <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>View Ad</h1>
-        <br></br>
-        <table style={{ width: '100%', borderCollapse: 'collapse', }}>
-          <tbody>
-            <tr><td style={{ padding: '10px', backgroundColor: '#ffffff' }}>
-              <img src={typeof (ad.image1) !== 'undefined' ? require(`E:/Pro Work/My Developments/TravelLanka/webfrontend/src/components/beachimages/${ad.image1}`) : 'Error'} style={{ width: "100px", height: "100px", margin: "auto" }} alt="AD1" />
-              <img src={typeof (ad.image2) !== 'undefined' ? require(`E:/Pro Work/My Developments/TravelLanka/webfrontend/src/components/beachimages/${ad.image1}`) : 'Error'} style={{ width: "100px", height: "100px", margin: "auto" }} alt="AD2" />
-              </td></tr>
-            <tr>
-              <td style={{ padding: '10px', backgroundColor: '#fafafa', fontWeight: 'bold' }}>title</td>
-              <td style={{ padding: '10px', backgroundColor: '#ffffff' }}>{ad.title}</td>
-            </tr>
-            <tr>
-              <td style={{ padding: '10px', backgroundColor: '#fafafa', fontWeight: 'bold' }}>description</td>
-              <td style={{ padding: '10px', backgroundColor: '#ffffff' }}>{ad.description}</td>
-            </tr>
-            <tr>
-              <td style={{ padding: '10px', backgroundColor: '#fafafa', fontWeight: 'bold' }}>province</td>
-              <td style={{ padding: '10px', backgroundColor: '#ffffff' }}>{ad.province}</td>
-            </tr>
-            <tr>
-              <td style={{ padding: '10px', backgroundColor: '#fafafa', fontWeight: 'bold' }}>district</td>
-              <td style={{ padding: '10px', backgroundColor: '#ffffff' }}>{ad.district}</td>
-            </tr>
-          </tbody>
-        </table>
+    <div>
+      <h1>Beach Details</h1>
+      <h2>{beach.title}</h2>
+      <img src={img1} alt="Beach" style={{width:"100px", height:"100px"}}/>
+      <p>{beach.description}</p>
+      <p>Province: {beach.province}</p>
+      <p>District: {beach.district}</p>
+      <p>Category: {beach.category}</p>
+      <div>
+        <img src={`/beachimages/${beach.images}`} alt="Beach" />
       </div>
     </div>
   );

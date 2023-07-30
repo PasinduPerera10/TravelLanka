@@ -1,111 +1,82 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const Beach = require("../models/beach.model");
-const multer = require("multer");
-const { v4: uuidv4 } = require("uuid");
-let path = require("path");
+const multer = require('multer'); // For handling image uploads
+const path = require('path');
+const Beach = require('../models/beach.model');
 
+// Multer configuration for image upload
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../webfrontend/src/components/beachimages')
+    cb(null, '../webfrontend/public/beachimages');
   },
   filename: function (req, file, cb) {
-    const fileName = uuidv4() + path.extname(file.originalname);
-    cb(null, fileName);
-  }
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  },
 });
 
-const uplobeach = multer({ storage: storage });
+const upload = multer({ storage: storage });
 
-router.post("/beach/new", uplobeach.fields([{ name: 'image1' }, { name: 'image2' }]), async (req, res) => {
-  const { title, description, province, district } = req.body;
+// Route to add a new beach
+router.post('/beach/new', upload.single('image'), (req, res) => {
+  const { title, description, province, district, category } = req.body;
+  const image = req.file ? req.file.path : ''; // Use req.file to get the uploaded image path
 
-  if (!title || !description) {
-    res.status(422).json("Please enter all data");
-    return 0;
-  } else {
-    try {
-      const beachdbeach = new Beach({
-        title: req.body.title,
-        description: req.body.description,
-        province: req.body.province,
-        district: req.body.district,
-        image1: req.files['image1'][0].filename,
-        image2: req.files['image2'][0].filename,
-      });
+  const newBeach = new Beach({
+    title,
+    description,
+    province,
+    district,
+    category,
+    images: image, // Store the image path as a string
+  });
 
-      await beachdbeach.save();
-      res.status(201).json(beachdbeach);
-    } catch (error) {
-      console.log("Error", error);
-      res.status(422).json(error);
-    }
-  }
+  newBeach
+    .save()
+    .then((beach) => res.json(beach))
+    .catch((err) => res.status(400).json('Error: ' + err));
 });
 
-// get beach data
-
-router.get("/beach/view", async (req, res) => {
-  try {
-    const getbeachdata = await Beach
-      .find();
-
-    res.status(201).json({ getbeachdata });
-    console.log(getbeachdata)
-  } catch (error) {
-    return res.status(422).json(error);
-  }
+// Route to get all beaches
+router.get('/beach/view', (req, res) => {
+  Beach.find()
+    .then((beaches) => res.json(beaches))
+    .catch((err) => res.status(400).json('Error: ' + err));
 });
 
-// get individual beach data
-
-router.get("/beach/view/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    const beachindividual = await Beach
-      .findById({ _id: id });
-    res.status(201).json(beachindividual);
-    console.log(beachindividual)
-  } catch (error) {
-    res.status(422).json(error);
-  }
+// Route to get a beach by ID
+router.get('/beach/view/:id', (req, res) => {
+  Beach.findById(req.params.id)
+    .then((beach) => res.json(beach))
+    .catch((err) => res.status(400).json('Error: ' + err));
 });
 
-// update existing beach data
+// Route to update a beach
+router.put('/beach/update/:id', upload.single('image'), (req, res) => {
+  Beach.findById(req.params.id)
+    .then((beach) => {
+      beach.title = req.body.title;
+      beach.description = req.body.description;
+      beach.province = req.body.province;
+      beach.district = req.body.district;
+      beach.category = req.body.category;
 
-router.put("/beach/update/:id", async (req, res) => {
-  const { title, description } = req.body;
-  if (
-    !title ||
-    !description
-  ) {
-    res.status(422).json("Please enter all data");
-    return 0;
-  }
-  try {
-    const { id } = req.params;
+      if (req.file) {
+        // Update the image only if a new image is uploaded
+        beach.images = [req.file.path];
+      }
 
-    const updatebeach = await Beach.findByIdAndUpdate(id, req.body, {
-      new: true,
-    });
-
-    res.status(201).json(updatebeach);
-  } catch (error) {
-    res.status(422).json(error);
-  }
+      beach
+        .save()
+        .then(() => res.json('Beach updated successfully'))
+        .catch((err) => res.status(400).json('Error: ' + err));
+    })
+    .catch((err) => res.status(400).json('Error: ' + err));
 });
 
-// delete existing beach
-router.delete("/beach/delete/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    const deletebeach = await Beach.findByIdAndDelete({ _id: id });
-    res.status(201).json(deletebeach);
-  } catch (error) {
-    res.status(422).json(error);
-  }
-});                       
+router.delete('/beach/delete/:id', (req, res) => {
+  Beach.findByIdAndRemove(req.params.id)
+    .then(() => res.json('Beach deleted successfully'))
+    .catch((err) => res.status(400).json('Error: ' + err));
+});
 
 module.exports = router;
