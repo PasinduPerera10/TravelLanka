@@ -1,6 +1,6 @@
 # VisitTravel
 
-![VisitTravel Logo](webfrontend\public\logo.png)
+![VisitTravel Logo](./webfrontend/public/logo.png)
 
 ## Description
 
