@@ -5,12 +5,13 @@
   
   /* Style header */
   .hero {
-    background-image: url(../assests/image1.jpg);
+    background-image: url(../assests/image4.jpg);
     background-size: cover;
     background-position: center;
     color: #fff;
     padding: 30px;
     text-align: center;
+    height: 270px;
   }
   
   .hero-content {

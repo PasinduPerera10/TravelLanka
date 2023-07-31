@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import img3 from './assests/image1.jpg';
+import img3 from './assests/logo.png';
 
 const HeaderContainer = styled.div`
   background-color: #333;
