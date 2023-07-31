@@ -5,11 +5,14 @@ import Home from './Home';
 import UpdateBeach from './beachManagement/UpdateBeach';
 import ViewBeach from './beachManagement/ViewBeach';
 import ViewBeaches from './beachManagement/ViewBeaches';
+import Header from './Header';
+import Footer from './Footer';
 
 function Router() {
   return (
     <BrowserRouter>
       <div className="App">
+        <Header/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/addbeach" element={<AddBeach />} />
@@ -25,6 +28,7 @@ function Router() {
           />
           <Route path="/viewbeaches" element={<ViewBeaches />} />
         </Routes>
+        <Footer/>
       </div>
     </BrowserRouter>
   );

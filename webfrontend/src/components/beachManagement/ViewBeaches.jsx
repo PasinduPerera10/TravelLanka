@@ -1,11 +1,121 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Card, Button } from 'react-bootstrap';
+import img2 from '../assests/image1.jpg';
+import styled from 'styled-components';
+
+// Styled-components styles
+const CardContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: 20px;
+  padding: 20px;
+`;
+
+const CustomCard = styled(Card)`
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+`;
+
+const CustomCardTitle = styled(Card.Title)`
+  text-align: center;
+  color: #000;
+  font-size: 20px;
+  margin-bottom: 10px;
+`;
+
+const CenteredImage = styled(Card.Img)`
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+`;
+
+const CenteredText = styled(Card.Text)`
+  text-align: center;
+`;
+
+const CustomButtonGreen = styled(Button)`
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #449d44;
+  }
+`;
+
+const CustomButtonYellow = styled(Button)`
+  background-color: #f0ad4e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #ec971f;
+  }
+`;
+
+const CustomButtonRed = styled(Button)`
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #c9302c;
+  }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+`;
+
+const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+const Pagination = styled.ul`
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+`;
+
+const PaginationItem = styled.li`
+  margin: 0 5px;
+  padding: 5px 10px;
+  background-color: ${(props) => (props.active ? '#007bff' : '#fff')};
+  color: ${(props) => (props.active ? '#fff' : '#007bff')};
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  cursor: pointer;
+`;
+
+const PaginationLink = styled.span`
+  cursor: pointer;
+`;
 
 const ViewBeaches = () => {
   const [beaches, setBeaches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(8);
 
   useEffect(() => {
     axios
@@ -26,12 +136,21 @@ const ViewBeaches = () => {
       .delete(`http://localhost:8060/beaches/beach/delete/${id}`)
       .then(() => {
         setBeaches((prevBeaches) => prevBeaches.filter((beach) => beach._id !== id));
-        setError(''); // Reset error state on successful delete
+        setError('');
       })
       .catch((error) => {
         setError('Error deleting beach.');
       });
   };
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // Get the current items based on pagination
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentBeaches = beaches.slice(indexOfFirstItem, indexOfLastItem);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -39,26 +158,44 @@ const ViewBeaches = () => {
 
   return (
     <div>
-      <h2>All Beaches</h2>
-      {error && <div>{error}</div>}
-      {beaches.length === 0 && <div>No beaches found</div>}
-      {beaches.map((beach) => (
-        <div key={beach._id}>
-          <h3>{beach.title}</h3>
-          <p>{beach.description}</p>
-          <p>Province: {beach.province}</p>
-          <p>District: {beach.district}</p>
-          <p>Category: {beach.category}</p>
-          <div>
-            {Array.isArray(beach.images) && beach.images.map((image, index) => (
-              <img key={index} src={image} alt={`Beach ${index + 1}`} />
+      <CardContainer>
+        {error && <div>{error}</div>}
+        {currentBeaches.length === 0 && <div>No beaches found</div>}
+        {currentBeaches.map((beach) => (
+          <CustomCard key={beach._id}>
+            <CustomCardTitle>{beach.title}</CustomCardTitle>
+            <CenteredImage variant="top" src={img2} alt="Beach" />
+            <Card.Body>
+              <CenteredText>{beach.description}</CenteredText>
+              <CenteredText>Province: {beach.province}</CenteredText>
+              <CenteredText>District: {beach.district}</CenteredText>
+              <CenteredText>Category: {beach.category}</CenteredText>
+              <ButtonContainer>
+                <Link to={`/viewbeach/${beach._id}`}>
+                  <CustomButtonGreen variant={`button-${beach._id}`}>View Details</CustomButtonGreen>
+                </Link>
+                <Link to={`/updatebeach/${beach._id}`}>
+                  <CustomButtonYellow variant={`button-${beach._id}`}>Update</CustomButtonYellow>
+                </Link>
+                <CustomButtonRed variant={`button-${beach._id}`} onClick={() => handleDelete(beach._id)}>
+                  Delete
+                </CustomButtonRed>
+              </ButtonContainer>
+            </Card.Body>
+          </CustomCard>
+        ))}
+      </CardContainer>
+      <PaginationContainer>
+        {beaches.length > itemsPerPage && (
+          <Pagination>
+            {Array.from({ length: Math.ceil(beaches.length / itemsPerPage) }, (_, index) => (
+              <PaginationItem key={index} active={index + 1 === currentPage}>
+                <PaginationLink onClick={() => paginate(index + 1)}>{index + 1}</PaginationLink>
+              </PaginationItem>
             ))}
-          </div>
-          <Link to={`/viewbeach/${beach._id}`}>View Details</Link>
-          <Link to={`/updatebeach/${beach._id}`}>Update</Link>
-          <button onClick={() => handleDelete(beach._id)}>Delete</button>
-        </div>
-      ))}
+          </Pagination>
+        )}
+      </PaginationContainer>
     </div>
   );
 };

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import img1 from '../assests/image1.jpg'
+import img1 from '../assests/image1.jpg';
+import styled from 'styled-components';
 
 const ViewBeach = () => {
   const { id } = useParams();
@@ -36,20 +37,70 @@ const ViewBeach = () => {
     return <div>Beach not found</div>;
   }
 
+  // Generate a unique class name based on the beach ID
+  const cardClass = `unique-card-${beach.id}`;
+
   return (
-    <div>
-      <h1>Beach Details</h1>
-      <h2>{beach.title}</h2>
-      <img src={img1} alt="Beach" style={{width:"100px", height:"100px"}}/>
-      <p>{beach.description}</p>
-      <p>Province: {beach.province}</p>
-      <p>District: {beach.district}</p>
-      <p>Category: {beach.category}</p>
+    <CenteredDiv>
       <div>
-        <img src={`/beachimages/${beach.images}`} alt="Beach" />
+        {/* <h1>Beach Details</h1> */}
+        <CustomCard className={cardClass}>
+          <CustomCardTitle>{beach.title}</CustomCardTitle>
+          <CustomImage src={img1} alt="Beach" />
+          <CardBody>
+            <CustomText>{beach.description}</CustomText>
+            <CustomText>Province: {beach.province}</CustomText>
+            <CustomText>District: {beach.district}</CustomText>
+            <CustomText>Category: {beach.category}</CustomText>
+          </CardBody>
+        </CustomCard>
       </div>
-    </div>
+    </CenteredDiv>
   );
 };
 
 export default ViewBeach;
+
+// Styled-components styles
+
+const CenteredDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
+
+const CustomCard = styled.div`
+  width: 18rem;
+  border: 1px solid #ccc;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  padding: 20px;
+`;
+
+const CustomCardTitle = styled.h2`
+  color: #000; /* Orange color */
+  font-size: 24px;
+  margin-bottom: 10px;
+`;
+
+const CustomImage = styled.img`
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+`;
+
+const CardBody = styled.div`
+  max-height: 200px;
+  overflow: hidden;
+`;
+
+const CustomText = styled.p`
+  text-align: center;
+  margin-bottom: 5px;
+`;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-const UpdateBeach = ({ match }) => {
+const UpdateBeach = () => {
   const { id } = useParams();
   const [beach, setBeach] = useState(null);
   const [title, setTitle] = useState('');
@@ -10,11 +10,9 @@ const UpdateBeach = ({ match }) => {
   const [province, setProvince] = useState('');
   const [district, setDistrict] = useState('');
   const [category, setCategory] = useState('');
-  const [images, setImages] = useState([]);
+  const [image, setImage] = useState(null); // Initialize as null
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-
-  // const id = match.params.id;
 
   useEffect(() => {
     axios
@@ -26,7 +24,6 @@ const UpdateBeach = ({ match }) => {
         setProvince(response.data.province);
         setDistrict(response.data.district);
         setCategory(response.data.category);
-        setImages(response.data.images);
       })
       .catch((error) => {
         setErrorMessage('Error while fetching beach details.');
@@ -54,9 +51,8 @@ const UpdateBeach = ({ match }) => {
   };
 
   const handleImageChange = (e) => {
-    // Handling multiple images
-    const files = Array.from(e.target.files);
-    setImages(files);
+    const file = e.target.files[0];
+    setImage(file);
   };
 
   const handleSubmit = (e) => {
@@ -69,10 +65,10 @@ const UpdateBeach = ({ match }) => {
     formData.append('district', district);
     formData.append('category', category);
 
-    // Append each image to the form data
-    images.forEach((image, index) => {
-      formData.append(`images[${index}]`, image);
-    });
+    // Check if image is not null before appending it to the form data
+    if (image !== null) {
+      formData.append('image', image);
+    }
 
     axios
       .put(`http://localhost:8060/beaches/beach/update/${id}`, formData, {
@@ -121,8 +117,8 @@ const UpdateBeach = ({ match }) => {
           <input type="text" value={category} onChange={handleCategoryChange} />
         </div>
         <div>
-          <label>Upload Images (up to 2):</label>
-          <input type="file" accept="image/*" multiple onChange={handleImageChange} />
+          <label>Upload Image:</label>
+          <input type="file" accept="image/*" onChange={handleImageChange} />
         </div>
         <button type="submit">Update</button>
       </form>
