@@ -118,7 +118,7 @@ const ViewBeaches4 = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8060/beaches/beach/view4')
+      .get('https://visitlanka-backend.onrender.com/beaches/beach/view4')
       .then((response) => {
         setBeaches(response.data);
         setLoading(false);
@@ -132,7 +132,7 @@ const ViewBeaches4 = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:8060/beaches/beach/delete/${id}`)
+      .delete(`https://visitlanka-backend.onrender.com/beaches/beach/delete/${id}`)
       .then(() => {
         setBeaches((prevBeaches) => prevBeaches.filter((beach) => beach._id !== id));
         setError('');

@@ -16,7 +16,7 @@ const UpdateBeach = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8060/beaches/beach/view/${id}`)
+      .get(`https://visitlanka-backend.onrender.com/beaches/beach/view/${id}`)
       .then((response) => {
         setBeach(response.data);
         setTitle(response.data.title);
@@ -71,7 +71,7 @@ const UpdateBeach = () => {
     }
 
     axios
-      .put(`http://localhost:8060/beaches/beach/update/${id}`, formData, {
+      .put(`https://visitlanka-backend.onrender.com/beaches/beach/update/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

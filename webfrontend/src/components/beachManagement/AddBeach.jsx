@@ -43,7 +43,7 @@ const AddBeach = () => {
       formData.append('image4', image4);
       formData.append('image5', image5);
 
-      await axios.post('http://localhost:8060/beaches/beach/new', formData, {
+      await axios.post('https://visitlanka-backend.onrender.com/beaches/beach/new', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

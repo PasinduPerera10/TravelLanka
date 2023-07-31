@@ -12,7 +12,7 @@ const Map = () => {
 
   useEffect(() => {
     // Fetch the beach data from the server
-    fetch('http://localhost:8060/beaches/beach/view')
+    fetch('https://visitlanka-backend.onrender.com/beaches/beach/view')
       .then((response) => response.json())
       .then((data) => setBeaches(data))
       .catch((error) => console.error('Error fetching beach data:', error));
