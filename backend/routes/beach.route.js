@@ -48,7 +48,7 @@ router.get('/beach/view', (req, res) => {
 });
 
 router.get('/beach/view1', (req, res) => {
-  Beach.find({category : "Beach"})
+  Beach.find({category : "Beaches"})
     .then((beaches) => res.json(beaches))
     .catch((err) => res.status(400).json('Error: ' + err));
 });
