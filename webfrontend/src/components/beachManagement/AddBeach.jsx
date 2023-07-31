@@ -8,10 +8,10 @@ const AddBeach = () => {
   const [district, setDistrict] = useState('');
   const [category, setCategory] = useState('');
   const [image1, setImage1] = useState(null);
-  const [image2, setImage2] = useState(null);
-  const [image3, setImage3] = useState(null);
-  const [image4, setImage4] = useState(null);
-  const [image5, setImage5] = useState(null);
+  // const [image2, setImage2] = useState(null);
+  // const [image3, setImage3] = useState(null);
+  // const [image4, setImage4] = useState(null);
+  // const [image5, setImage5] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -22,10 +22,10 @@ const AddBeach = () => {
   const handleCategoryChange = (e) => setCategory(e.target.value);
 
   const handleImage1Change = (e) => setImage1(e.target.files[0]);
-  const handleImage2Change = (e) => setImage2(e.target.files[0]);
-  const handleImage3Change = (e) => setImage3(e.target.files[0]);
-  const handleImage4Change = (e) => setImage4(e.target.files[0]);
-  const handleImage5Change = (e) => setImage5(e.target.files[0]);
+  // const handleImage2Change = (e) => setImage2(e.target.files[0]);
+  // const handleImage3Change = (e) => setImage3(e.target.files[0]);
+  // const handleImage4Change = (e) => setImage4(e.target.files[0]);
+  // const handleImage5Change = (e) => setImage5(e.target.files[0]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,10 +38,10 @@ const AddBeach = () => {
       formData.append('district', district);
       formData.append('category', category);
       formData.append('image1', image1);
-      formData.append('image2', image2);
-      formData.append('image3', image3);
-      formData.append('image4', image4);
-      formData.append('image5', image5);
+      // formData.append('image2', image2);
+      // formData.append('image3', image3);
+      // formData.append('image4', image4);
+      // formData.append('image5', image5);
 
       await axios.post('https://visitlanka-backend.onrender.com/beaches/beach/new', formData, {
         headers: {
@@ -58,10 +58,10 @@ const AddBeach = () => {
       setDistrict('');
       setCategory('');
       setImage1(null);
-      setImage2(null);
-      setImage3(null);
-      setImage4(null);
-      setImage5(null);
+      // setImage2(null);
+      // setImage3(null);
+      // setImage4(null);
+      // setImage5(null);
 
       // You can perform any additional actions here after successful submission
       // For example, display a success notification or navigate to another page
@@ -118,7 +118,7 @@ const AddBeach = () => {
           <label>Upload Image 1:</label>
           <input type="file" accept="image/*" onChange={handleImage1Change} />
         </div>
-        <div>
+        {/* <div>
           <label>Upload Image 2:</label>
           <input type="file" accept="image/*" onChange={handleImage2Change} />
         </div>
@@ -133,7 +133,7 @@ const AddBeach = () => {
         <div>
           <label>Upload Image 5:</label>
           <input type="file" accept="image/*" onChange={handleImage5Change} />
-        </div>
+        </div> */}
         <button type="submit">Submit</button>
       </form>
     </div>
