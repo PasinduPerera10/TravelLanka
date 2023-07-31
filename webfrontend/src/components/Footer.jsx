@@ -12,11 +12,11 @@ const FooterText = styled.p`
   margin: 0;
 `;
 
-const FooterLink = styled.a`
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-`;
+// const FooterLink = styled.a`
+//   color: #fff;
+//   text-decoration: none;
+//   font-weight: bold;
+// `;
 
 const Footer = () => {
   return (

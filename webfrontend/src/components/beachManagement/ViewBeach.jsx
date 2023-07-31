@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import img1 from '../assests/image1.jpg';
 import styled from 'styled-components';
 
 const ViewBeach = () => {

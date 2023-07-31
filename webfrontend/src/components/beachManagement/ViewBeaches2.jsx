@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
-import img2 from '../assests/image1.jpg';
 import styled from 'styled-components';
 
 // Styled-components styles
