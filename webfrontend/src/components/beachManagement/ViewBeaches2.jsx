@@ -128,10 +128,10 @@ const ViewBeaches2 = () => {
             {/* Display the image1 */}
             <CenteredImage variant="top" src={`/beachimages/${beach.image1}`} alt="Beach" />
             <Card.Body>
-              <CenteredText>{beach.description}</CenteredText>
+              {/* <CenteredText>{beach.description}</CenteredText> */}
               <CenteredText>Province: {beach.province}</CenteredText>
               <CenteredText>District: {beach.district}</CenteredText>
-              <CenteredText>Category: {beach.category}</CenteredText>
+              {/* <CenteredText>Category: {beach.category}</CenteredText> */}
               <ButtonContainer>
                 <Link to={`/viewbeach/${beach._id}`}>
                   <CustomButtonGreen variant={`button-${beach._id}`}>View Details</CustomButtonGreen>
