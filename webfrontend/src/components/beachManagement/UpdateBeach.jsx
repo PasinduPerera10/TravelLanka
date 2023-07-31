@@ -90,6 +90,9 @@ const UpdateBeach = () => {
     return <div>Loading...</div>;
   }
 
+  const categories = ["Beaches", "Cultural and Historical", "Wildlife and Nature", "Adventure and Trekking", "Ayurveda and Wellness", "Hill Country", "Cuisine", "Festivals and Events"];
+  const provinces = ["Central Province", "Eastern Province", "North Central Province", "Northern Province", "North Western Province", "Sabaragamuwa Province", "Southern Province", "Uva Province", "Western Province"];
+
   return (
     <div>
       <h2>Update Beach</h2>
@@ -106,7 +109,14 @@ const UpdateBeach = () => {
         </div>
         <div>
           <label>Province:</label>
-          <input type="text" value={province} onChange={handleProvinceChange} />
+          <select value={province} onChange={handleProvinceChange}>
+            <option value="">Select a province</option>
+            {provinces.map((province) => (
+              <option key={province} value={province}>
+                {province}
+              </option>
+            ))}
+          </select>
         </div>
         <div>
           <label>District:</label>
@@ -114,7 +124,14 @@ const UpdateBeach = () => {
         </div>
         <div>
           <label>Category:</label>
-          <input type="text" value={category} onChange={handleCategoryChange} />
+          <select value={category} onChange={handleCategoryChange}>
+            <option value="">Select a category</option>
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
         </div>
         <div>
           <label>Upload Image:</label>

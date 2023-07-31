@@ -33,14 +33,14 @@ const Header = () => {
       <Logo src={img3} alt="Logo" />
       <NavLinks>
         <NavLink to="/">Home</NavLink>
-        <NavLink to="/category1">Beaches</NavLink>
-        <NavLink to="/category2">Cultural and Historical</NavLink>
-        <NavLink to="/category1">Wildlife and Nature</NavLink>
-        <NavLink to="/category2">Adventure and Trekking</NavLink>
-        <NavLink to="/category1">Ayurveda and Wellness</NavLink>
-        <NavLink to="/category2">Hill Country</NavLink>
-        <NavLink to="/category1">Cuisine</NavLink>
-        <NavLink to="/category2">Festivals and Events</NavLink>
+        <NavLink to="/view1">Beaches</NavLink>
+        <NavLink to="/view2">Cultural and Historical</NavLink>
+        <NavLink to="/view3">Wildlife and Nature</NavLink>
+        <NavLink to="/view4">Adventure and Trekking</NavLink>
+        <NavLink to="/view5">Ayurveda and Wellness</NavLink>
+        <NavLink to="/view6">Hill Country</NavLink>
+        <NavLink to="/view7">Cuisine</NavLink>
+        <NavLink to="/view8">Festivals and Events</NavLink>
       </NavLinks>
     </HeaderContainer>
   );

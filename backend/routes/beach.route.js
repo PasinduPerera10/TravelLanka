@@ -47,6 +47,54 @@ router.get('/beach/view', (req, res) => {
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
+router.get('/beach/view1', (req, res) => {
+  Beach.find({category : "Beach"})
+    .then((beaches) => res.json(beaches))
+    .catch((err) => res.status(400).json('Error: ' + err));
+});
+
+router.get('/beach/view2', (req, res) => {
+  Beach.find({category : "Cultural and Historical"})
+    .then((beaches) => res.json(beaches))
+    .catch((err) => res.status(400).json('Error: ' + err));
+});
+
+router.get('/beach/view3', (req, res) => {
+  Beach.find({category : "Wildlife and Nature"})
+    .then((beaches) => res.json(beaches))
+    .catch((err) => res.status(400).json('Error: ' + err));
+});
+
+router.get('/beach/view4', (req, res) => {
+  Beach.find({category : "Adventure and Trekking"})
+    .then((beaches) => res.json(beaches))
+    .catch((err) => res.status(400).json('Error: ' + err));
+});
+
+router.get('/beach/view5', (req, res) => {
+  Beach.find({category : "Ayurveda and Wellness"})
+    .then((beaches) => res.json(beaches))
+    .catch((err) => res.status(400).json('Error: ' + err));
+});
+
+router.get('/beach/view6', (req, res) => {
+  Beach.find({category : "Hill Country"})
+    .then((beaches) => res.json(beaches))
+    .catch((err) => res.status(400).json('Error: ' + err));
+});
+
+router.get('/beach/view7', (req, res) => {
+  Beach.find({category : "Cuisine"})
+    .then((beaches) => res.json(beaches))
+    .catch((err) => res.status(400).json('Error: ' + err));
+});
+
+router.get('/beach/view8', (req, res) => {
+  Beach.find({category : "Festivals and Events"})
+    .then((beaches) => res.json(beaches))
+    .catch((err) => res.status(400).json('Error: ' + err));
+});
+
 // Route to get a beach by ID
 router.get('/beach/view/:id', (req, res) => {
   Beach.findById(req.params.id)

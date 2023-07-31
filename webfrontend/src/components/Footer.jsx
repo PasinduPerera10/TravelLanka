@@ -21,13 +21,13 @@ const FooterLink = styled.a`
 const Footer = () => {
   return (
     <FooterContainer>
-      <FooterText>TravelLanka &copy; {new Date().getFullYear()}</FooterText>
-      <FooterText>
+      <FooterText>VisitLanka &copy; {new Date().getFullYear()}</FooterText>
+      {/* <FooterText>
         Made with <span role="img" aria-label="Love">❤️</span> in Sri Lanka
-      </FooterText>
-      <FooterText>
-        Contact us: <FooterLink href="mailto:info@travellanka.com">info@travellanka.com</FooterLink>
-      </FooterText>
+      </FooterText> */}
+      {/* <FooterText>
+        Contact us: <FooterLink href="mailto:info@visitlanka.com">info@visitlanka.com</FooterLink>
+      </FooterText> */}
     </FooterContainer>
   );
 };

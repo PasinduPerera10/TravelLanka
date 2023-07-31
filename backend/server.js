@@ -11,7 +11,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // MongoDB connection setup, update 'mongodb://localhost:27017/travelweb' with your MongoDB connection string
-mongoose.connect('mongodb+srv://Pasindu:Pasindu@cluster0.4fhs7.mongodb.net/TravelLanka', {
+mongoose.connect('mongodb+srv://Pasindu:Pasindu@cluster0.4fhs7.mongodb.net/VisitLanka', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

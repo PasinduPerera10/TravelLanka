@@ -1,1 +1,1 @@
-# TravelLanka
+# VisitLanka
