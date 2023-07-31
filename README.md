@@ -8,10 +8,35 @@ VisitTravel is a web application that provides information about various travel 
 
 ## Website
 
-You can visit the website [here](https://example.com).
+You can visit the website [here](https://visitlanka.pages.dev/).
 
 ## Getting Started
 
 To get started with VisitTravel, follow the instructions below:
 
 1. Clone the repository:
+
+2. Change into the project directory:
+
+3. Install dependencies:
+
+4. Start the development server:
+
+npm run dev
+
+4. Start the development frontend:
+
+npm start
+
+## Technologies Used
+
+MERN Stack
+
+## Contribution
+
+Contributions to VisitTravel are welcome! If you find any issues or have suggestions for improvement, please feel free to open a pull request or an issue.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
