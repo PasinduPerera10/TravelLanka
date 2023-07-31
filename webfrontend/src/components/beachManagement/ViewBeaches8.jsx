@@ -170,7 +170,7 @@ const ViewBeaches8 = () => {
               <CenteredText>Province: {beach.province}</CenteredText>
               <CenteredText>District: {beach.district}</CenteredText>
               <CenteredText>Category: {beach.category}</CenteredText>
-              <ButtonContainer>
+              {/* <ButtonContainer>
                 <Link to={`/viewbeach/${beach._id}`}>
                   <CustomButtonGreen variant={`button-${beach._id}`}>View Details</CustomButtonGreen>
                 </Link>
@@ -180,7 +180,7 @@ const ViewBeaches8 = () => {
                 <CustomButtonRed variant={`button-${beach._id}`} onClick={() => handleDelete(beach._id)}>
                   Delete
                 </CustomButtonRed>
-              </ButtonContainer>
+              </ButtonContainer> */}
             </Card.Body>
           </CustomCard>
         ))}
