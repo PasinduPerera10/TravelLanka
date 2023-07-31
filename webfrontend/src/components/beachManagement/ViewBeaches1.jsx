@@ -34,7 +34,7 @@ const CenteredImage = styled(Card.Img)`
 `;
 
 const CenteredText = styled(Card.Text)`
-  text-align: center;
+  text-align: justify;
 `;
 
 const CustomButtonGreen = styled(Button)`
