@@ -32,8 +32,8 @@ const Home = () => {
       </section>
       <section className="brief-description">
         <Container>
-          <h2>Why you travel in Sri Lanka ?</h2>
-          <p>"Discover the enchanting beauty of Sri Lanka, a tropical paradise where stunning landscapes, 
+          <h2>Why are you traveling Sri Lanka?</h2>
+          <p>Discover the enchanting beauty of Sri Lanka, a tropical paradise where stunning landscapes, 
           idyllic beaches, and ancient cultural heritage converge to offer an unforgettable experience. 
           Immerse yourself in the charm of ancient temples, vibrant cities, and the warm hospitality of the locals.
 From thrilling adventures like trekking and wildlife safaris to serene beach resorts and rejuvenating Ayurvedic 
@@ -50,7 +50,7 @@ seeking different experiences.</p>
       <section className="brief-description">
       <Container>
           <Row>
-          <h2>Don't forget to follow belows</h2>
+          <h2>Don't forget to follow the below points. 😊</h2>
             <Col md={4}>
               <div className="feature-card">
                 <h2>Explore Beautiful Destinations</h2>
