@@ -32,7 +32,7 @@ const Home = () => {
       </section>
       <section className="brief-description">
         <Container>
-          <h2>Why are you traveling Sri Lanka?</h2>
+          <h2>Discover the Enchanting Beauty of Sri Lanka</h2>
           <p>Discover the enchanting beauty of Sri Lanka, a tropical paradise where stunning landscapes, 
           idyllic beaches, and ancient cultural heritage converge to offer an unforgettable experience. 
           Immerse yourself in the charm of ancient temples, vibrant cities, and the warm hospitality of the locals.
@@ -50,7 +50,7 @@ seeking different experiences.</p>
       <section className="brief-description">
       <Container>
           <Row>
-          <h2>Don't forget to follow the below points. 😊</h2>
+          {/* <h2 style={{textAlign:"center"}}>Enjoy 😊</h2> */}
             <Col md={4}>
               <div className="feature-card">
                 <h2>Explore Beautiful Destinations</h2>

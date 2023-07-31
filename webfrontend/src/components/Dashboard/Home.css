@@ -24,6 +24,7 @@
     padding: 30px;
     background-color: #f9f9f9;
     color: #333;
+    text-align: justify;
   }
   
   /* Style feature section */
@@ -32,11 +33,12 @@
   }
   
   .feature-card {
-    padding: 20px;
+    padding: 35px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     background-color: #fff;
+    text-align: center;
   }
   
   .feature-card h2 {
