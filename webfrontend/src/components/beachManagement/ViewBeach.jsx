@@ -111,6 +111,6 @@ const CardBody = styled.div`
 `;
 
 const CustomText = styled.p`
-  text-align: center;
+  text-align: justify;
   margin-bottom: 5px;
 `;
