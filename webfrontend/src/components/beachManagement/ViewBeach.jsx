@@ -42,15 +42,20 @@ const ViewBeach = () => {
   return (
     <CenteredDiv>
       <div>
-        {/* <h1>Beach Details</h1> */}
         <CustomCard className={cardClass}>
           <CustomCardTitle>{beach.title}</CustomCardTitle>
-          <CustomImage variant="top" src={`/beachimages/${beach.image1}`} alt="Beach" />
+          <CustomImageGrid>
+          <CustomImage src={`/beachimages/${beach.image1}`} alt="Beach" />
+            <CustomImage src={`/beachimages/${beach.image2}`} alt="Beach" />
+            <CustomImage src={`/beachimages/${beach.image3}`} alt="Beach" />
+            <CustomImage src={`/beachimages/${beach.image4}`} alt="Beach" />
+            {/* <CustomImage src={`/beachimages/${beach.image5}`} alt="Beach" /> */}
+          </CustomImageGrid>
           <CardBody>
-            <CustomText>{beach.description}</CustomText>
             <CustomText>Province: {beach.province}</CustomText>
             <CustomText>District: {beach.district}</CustomText>
-            <CustomText>Category: {beach.category}</CustomText>
+            {/* <CustomText>Category: {beach.category}</CustomText> */}
+            <CustomText>{beach.description}</CustomText>
           </CardBody>
         </CustomCard>
       </div>
@@ -66,11 +71,12 @@ const CenteredDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 150vh;
+  margin-top: -130px
 `;
 
 const CustomCard = styled.div`
-  width: 18rem;
+  width: 47rem;
   border: 1px solid #ccc;
   text-align: center;
   border-radius: 8px;
@@ -85,13 +91,18 @@ const CustomCardTitle = styled.h2`
   margin-bottom: 10px;
 `;
 
+const CustomImageGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 10px;
+`;
+
 const CustomImage = styled.img`
   max-width: 100%;
   height: auto;
   display: block;
-  margin: 0 auto;
   border-radius: 8px;
-  margin-bottom: 10px;
 `;
 
 const CardBody = styled.div`

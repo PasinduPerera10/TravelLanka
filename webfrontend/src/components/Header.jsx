@@ -30,7 +30,9 @@ const NavLink = styled(Link)`
 const Header = () => {
   return (
     <HeaderContainer>
-      <Logo src={img3} alt="Logo" />
+      <Link to="/">
+            <Logo src={img3} alt="Logo" />
+          </Link>
       <NavLinks>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/view1">Beaches</NavLink>

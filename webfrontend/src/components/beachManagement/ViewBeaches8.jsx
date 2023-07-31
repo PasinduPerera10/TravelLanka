@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import { Link } from 'react-router-dom';
-import { Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Card, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 
 // Styled-components styles
@@ -37,50 +37,24 @@ const CenteredText = styled(Card.Text)`
   text-align: center;
 `;
 
-// const CustomButtonGreen = styled(Button)`
-//   background-color: #5cb85c;
-//   color: white;
-//   border: none;
-//   border-radius: 5px;
-//   padding: 5px 10px;
-//   margin-right: 5px;
-//   cursor: pointer;
-//   &:hover {
-//     background-color: #449d44;
-//   }
-// `;
+const CustomButtonGreen = styled(Button)`
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #449d44;
+  }
+`;
 
-// const CustomButtonYellow = styled(Button)`
-//   background-color: #f0ad4e;
-//   color: white;
-//   border: none;
-//   border-radius: 5px;
-//   padding: 5px 10px;
-//   margin-right: 5px;
-//   cursor: pointer;
-//   &:hover {
-//     background-color: #ec971f;
-//   }
-// `;
-
-// const CustomButtonRed = styled(Button)`
-//   background-color: #d9534f;
-//   color: white;
-//   border: none;
-//   border-radius: 5px;
-//   padding: 5px 10px;
-//   margin-right: 5px;
-//   cursor: pointer;
-//   &:hover {
-//     background-color: #c9302c;
-//   }
-// `;
-
-// const ButtonContainer = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   margin-top: 10px;
-// `;
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+`;
 
 const PaginationContainer = styled.div`
   display: flex;
@@ -130,18 +104,6 @@ const ViewBeaches8 = () => {
       });
   }, []);
 
-  // const handleDelete = (id) => {
-  //   axios
-  //     .delete(`https://visitlanka-backend.onrender.com/beaches/beach/delete/${id}`)
-  //     .then(() => {
-  //       setBeaches((prevBeaches) => prevBeaches.filter((beach) => beach._id !== id));
-  //       setError('');
-  //     })
-  //     .catch((error) => {
-  //       setError('Error deleting beach.');
-  //     });
-  // };
-
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -170,17 +132,11 @@ const ViewBeaches8 = () => {
               <CenteredText>Province: {beach.province}</CenteredText>
               <CenteredText>District: {beach.district}</CenteredText>
               <CenteredText>Category: {beach.category}</CenteredText>
-              {/* <ButtonContainer>
+              <ButtonContainer>
                 <Link to={`/viewbeach/${beach._id}`}>
                   <CustomButtonGreen variant={`button-${beach._id}`}>View Details</CustomButtonGreen>
                 </Link>
-                <Link to={`/updatebeach/${beach._id}`}>
-                  <CustomButtonYellow variant={`button-${beach._id}`}>Update</CustomButtonYellow>
-                </Link>
-                <CustomButtonRed variant={`button-${beach._id}`} onClick={() => handleDelete(beach._id)}>
-                  Delete
-                </CustomButtonRed>
-              </ButtonContainer> */}
+              </ButtonContainer>
             </Card.Body>
           </CustomCard>
         ))}
