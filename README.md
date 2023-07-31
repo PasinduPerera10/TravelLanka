@@ -1,4 +1,4 @@
-# VisitTravel
+# VisitLanka
 
 ![VisitTravel Logo](./webfrontend/public/logo.png)
 
