@@ -46,9 +46,9 @@ const ViewBeach = () => {
           <CustomCardTitle>{beach.title}</CustomCardTitle>
           <CustomImageGrid>
           <CustomImage src={`/beachimages/${beach.image1}`} alt="Beach" />
-            <CustomImage src={`/beachimages/${beach.image2}`} alt="Beach" />
+            {/* <CustomImage src={`/beachimages/${beach.image2}`} alt="Beach" />
             <CustomImage src={`/beachimages/${beach.image3}`} alt="Beach" />
-            <CustomImage src={`/beachimages/${beach.image4}`} alt="Beach" />
+            <CustomImage src={`/beachimages/${beach.image4}`} alt="Beach" /> */}
             {/* <CustomImage src={`/beachimages/${beach.image5}`} alt="Beach" /> */}
           </CustomImageGrid>
           <CardBody>
@@ -93,7 +93,7 @@ const CustomCardTitle = styled.h2`
 
 const CustomImageGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: 10px;
   margin-bottom: 10px;
 `;
