@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Route to add a new beach
-router.post('/beach/new', upload.single('image'), (req, res) => {
+router.post('/beach/new', upload.fields([{ name: 'image1' }, { name: 'image2' }, { name: 'image3' }, { name: 'image4' }, { name: 'image5' }]), (req, res) => {
   const { title, description, province, district, category } = req.body;
   const image = req.file ? req.file.path : ''; // Use req.file to get the uploaded image path
 
@@ -27,7 +27,11 @@ router.post('/beach/new', upload.single('image'), (req, res) => {
     province,
     district,
     category,
-    images: image, // Store the image path as a string
+    image1: req.files['image1'][0].filename,
+    image2: req.files['image2'][0].filename,
+    image3: req.files['image3'][0].filename,
+    image4: req.files['image4'][0].filename,
+    image5: req.files['image5'][0].filename,
   });
 
   newBeach
@@ -62,7 +66,7 @@ router.put('/beach/update/:id', upload.single('image'), (req, res) => {
 
       if (req.file) {
         // Update the image only if a new image is uploaded
-        beach.images = [req.file.path];
+        beach.image1 = req.file.filename;
       }
 
       beach

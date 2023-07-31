@@ -164,7 +164,8 @@ const ViewBeaches = () => {
         {currentBeaches.map((beach) => (
           <CustomCard key={beach._id}>
             <CustomCardTitle>{beach.title}</CustomCardTitle>
-            <CenteredImage variant="top" src={img2} alt="Beach" />
+            {/* Display the image1 */}
+            <CenteredImage variant="top" src={`/beachimages/${beach.image1}`} alt="Beach" />
             <Card.Body>
               <CenteredText>{beach.description}</CenteredText>
               <CenteredText>Province: {beach.province}</CenteredText>

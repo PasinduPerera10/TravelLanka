@@ -7,7 +7,21 @@ const beachSchema = new Schema({
   province: { type: String, required: true },
   district: { type: String, required: true },
   category: { type: String, required: true },
-  images: { type: String, required: true },
+  image1: {
+    type: String
+  },
+  image2: {
+    type: String
+  },
+  image3: {
+    type: String
+  },
+  image4: {
+    type: String
+  },
+  image5: {
+    type: String
+  },
 });
 
 const Beach = mongoose.model('Beach', beachSchema);

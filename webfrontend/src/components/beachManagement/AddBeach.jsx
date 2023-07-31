@@ -7,7 +7,11 @@ const AddBeach = () => {
   const [province, setProvince] = useState('');
   const [district, setDistrict] = useState('');
   const [category, setCategory] = useState('');
-  const [image, setImage] = useState(null);
+  const [image1, setImage1] = useState(null);
+  const [image2, setImage2] = useState(null);
+  const [image3, setImage3] = useState(null);
+  const [image4, setImage4] = useState(null);
+  const [image5, setImage5] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -17,11 +21,11 @@ const AddBeach = () => {
   const handleDistrictChange = (e) => setDistrict(e.target.value);
   const handleCategoryChange = (e) => setCategory(e.target.value);
 
-  const handleImageChange = (e) => {
-    // Handling a single image (overwrite the previous image)
-    const file = e.target.files[0];
-    setImage(file);
-  };
+  const handleImage1Change = (e) => setImage1(e.target.files[0]);
+  const handleImage2Change = (e) => setImage2(e.target.files[0]);
+  const handleImage3Change = (e) => setImage3(e.target.files[0]);
+  const handleImage4Change = (e) => setImage4(e.target.files[0]);
+  const handleImage5Change = (e) => setImage5(e.target.files[0]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,11 +37,11 @@ const AddBeach = () => {
       formData.append('province', province);
       formData.append('district', district);
       formData.append('category', category);
-
-      // Append the single image to the form data
-      if (image) {
-        formData.append('image', image);
-      }
+      formData.append('image1', image1);
+      formData.append('image2', image2);
+      formData.append('image3', image3);
+      formData.append('image4', image4);
+      formData.append('image5', image5);
 
       const response = await axios.post('http://localhost:8060/beaches/beach/new', formData, {
         headers: {
@@ -53,7 +57,11 @@ const AddBeach = () => {
       setProvince('');
       setDistrict('');
       setCategory('');
-      setImage(null);
+      setImage1(null);
+      setImage2(null);
+      setImage3(null);
+      setImage4(null);
+      setImage5(null);
 
       // You can perform any additional actions here after successful submission
       // For example, display a success notification or navigate to another page
@@ -90,8 +98,24 @@ const AddBeach = () => {
           <input type="text" value={category} onChange={handleCategoryChange} />
         </div>
         <div>
-          <label>Upload Image:</label>
-          <input type="file" accept="image/*" onChange={handleImageChange} />
+          <label>Upload Image 1:</label>
+          <input type="file" accept="image/*" onChange={handleImage1Change} />
+        </div>
+        <div>
+          <label>Upload Image 2:</label>
+          <input type="file" accept="image/*" onChange={handleImage2Change} />
+        </div>
+        <div>
+          <label>Upload Image 3:</label>
+          <input type="file" accept="image/*" onChange={handleImage3Change} />
+        </div>
+        <div>
+          <label>Upload Image 4:</label>
+          <input type="file" accept="image/*" onChange={handleImage4Change} />
+        </div>
+        <div>
+          <label>Upload Image 5:</label>
+          <input type="file" accept="image/*" onChange={handleImage5Change} />
         </div>
         <button type="submit">Submit</button>
       </form>

@@ -46,7 +46,7 @@ const ViewBeach = () => {
         {/* <h1>Beach Details</h1> */}
         <CustomCard className={cardClass}>
           <CustomCardTitle>{beach.title}</CustomCardTitle>
-          <CustomImage src={img1} alt="Beach" />
+          <CustomImage variant="top" src={`/beachimages/${beach.image1}`} alt="Beach" />
           <CardBody>
             <CustomText>{beach.description}</CustomText>
             <CustomText>Province: {beach.province}</CustomText>
