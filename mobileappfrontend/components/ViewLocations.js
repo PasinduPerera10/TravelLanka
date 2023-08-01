@@ -42,7 +42,7 @@ const ViewLocations = () => {
   return (
     <ScrollView style={styles.container}>
       <View>
-        <Text style={styles.title}>View Locationes</Text>
+        {/* <Text style={styles.title}>View Locations</Text> */}
         {error && <Text style={styles.error}>{error}</Text>}
         {beaches.length === 0 && <Text style={styles.noDataText}>No beaches found</Text>}
         {beaches.map((location) => (
