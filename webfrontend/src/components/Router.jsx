@@ -23,18 +23,18 @@ function Router() {
         <Header/>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/addbeach" element={<AddBeach />} />
+          <Route path="/addlocation" element={<AddBeach />} />
           {/* Pass the match object to UpdateBeach */}
           <Route
-            path="/updatebeach/:id"
+            path="/updatelocation/:id"
             element={<UpdateBeach/>}
           />
           {/* Update the Route for ViewBeach */}
           <Route
-            path="/viewbeach/:id"
+            path="/viewlocation/:id"
             element={<ViewBeach/>}
           />
-          <Route path="/viewbeaches" element={<ViewBeaches />} />
+          <Route path="/viewlocations" element={<ViewBeaches />} />
           <Route path="/view1" element={<ViewBeaches1 />} />
           <Route path="/view2" element={<ViewBeaches2 />} />
           <Route path="/view3" element={<ViewBeaches3 />} />

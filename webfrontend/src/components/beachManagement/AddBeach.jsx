@@ -43,13 +43,13 @@ const AddBeach = () => {
       // formData.append('image4', image4);
       // formData.append('image5', image5);
 
-      await axios.post('https://visitlanka-backend.onrender.com/beaches/beach/new', formData, {
+      await axios.post('http://localhost:8060/beaches/beach/new', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
-      setSuccessMessage('Beach added successfully'); // Assuming the response from the server contains the success message
+      setSuccessMessage('Location added successfully'); // Assuming the response from the server contains the success message
       setErrorMessage('');
       // Reset the form after successful submission
       setTitle('');
@@ -76,7 +76,7 @@ const AddBeach = () => {
 
   return (
     <div>
-      <h2>Add New Beach</h2>
+      <h2>Add New Location</h2>
       {successMessage && <div className="success">{successMessage}</div>}
       {errorMessage && <div className="error">{errorMessage}</div>}
       <form onSubmit={handleSubmit}>

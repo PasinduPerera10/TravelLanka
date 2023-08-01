@@ -16,7 +16,7 @@ const UpdateBeach = () => {
 
   useEffect(() => {
     axios
-      .get(`https://visitlanka-backend.onrender.com/beaches/beach/view/${id}`)
+      .get(`http://localhost:8060/beaches/beach/view/${id}`)
       .then((response) => {
         setBeach(response.data);
         setTitle(response.data.title);
@@ -71,13 +71,13 @@ const UpdateBeach = () => {
     }
 
     axios
-      .put(`https://visitlanka-backend.onrender.com/beaches/beach/update/${id}`, formData, {
+      .put(`http://localhost:8060/beaches/beach/update/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
       .then((response) => {
-        setSuccessMessage('Beach updated successfully!');
+        setSuccessMessage('Location updated successfully!');
         setErrorMessage('');
       })
       .catch((error) => {
@@ -95,7 +95,7 @@ const UpdateBeach = () => {
 
   return (
     <div>
-      <h2>Update Beach</h2>
+      <h2>Update Location</h2>
       {successMessage && <div className="success">{successMessage}</div>}
       {errorMessage && <div className="error">{errorMessage}</div>}
       <form onSubmit={handleSubmit}>

@@ -118,7 +118,7 @@ const ViewBeaches = () => {
 
   useEffect(() => {
     axios
-      .get('https://visitlanka-backend.onrender.com/beaches/beach/view')
+      .get('http://localhost:8060/beaches/beach/view')
       .then((response) => {
         setBeaches(response.data);
         setLoading(false);
@@ -132,7 +132,7 @@ const ViewBeaches = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`https://visitlanka-backend.onrender.com/beaches/beach/delete/${id}`)
+      .delete(`http://localhost:8060/beaches/beach/delete/${id}`)
       .then(() => {
         setBeaches((prevBeaches) => prevBeaches.filter((beach) => beach._id !== id));
         setError('');
@@ -157,6 +157,7 @@ const ViewBeaches = () => {
 
   return (
     <div>
+      <div><a href='/addlocation'>Add Location</a></div>
       <CardContainer>
         {error && <div>{error}</div>}
         {currentBeaches.length === 0 && <div>No beaches found</div>}
@@ -164,17 +165,17 @@ const ViewBeaches = () => {
           <CustomCard key={beach._id}>
             <CustomCardTitle>{beach.title}</CustomCardTitle>
             {/* Display the image1 */}
-            <CenteredImage variant="top" src={`/beachimages/${beach.image1}`} alt="Beach" />
+            <CenteredImage variant="top" src={`/beachimages/${beach.image1}`} alt="Location" />
             <Card.Body>
               {/* <CenteredText>{beach.description}</CenteredText> */}
               <CenteredText>Province: {beach.province}</CenteredText>
               <CenteredText>District: {beach.district}</CenteredText>
               <CenteredText>Category: {beach.category}</CenteredText>
               <ButtonContainer>
-                <Link to={`/viewbeach/${beach._id}`}>
+                <Link to={`/viewlocation/${beach._id}`}>
                   <CustomButtonGreen variant={`button-${beach._id}`}>View Details</CustomButtonGreen>
                 </Link>
-                <Link to={`/updatebeach/${beach._id}`}>
+                <Link to={`/updatelocation/${beach._id}`}>
                   <CustomButtonYellow variant={`button-${beach._id}`}>Update</CustomButtonYellow>
                 </Link>
                 <CustomButtonRed variant={`button-${beach._id}`} onClick={() => handleDelete(beach._id)}>

@@ -11,7 +11,7 @@ const ViewBeach = () => {
 
   useEffect(() => {
     axios
-      .get(`https://visitlanka-backend.onrender.com/beaches/beach/view/${id}`)
+      .get(`http://localhost:8060/beaches/beach/view/${id}`)
       .then((response) => {
         setBeach(response.data);
         setLoading(false);
@@ -33,7 +33,7 @@ const ViewBeach = () => {
   }
 
   if (!beach) {
-    return <div>Beach not found</div>;
+    return <div>Location not found</div>;
   }
 
   // Generate a unique class name based on the beach ID
@@ -45,11 +45,11 @@ const ViewBeach = () => {
         <CustomCard className={cardClass}>
           <CustomCardTitle>{beach.title}</CustomCardTitle>
           <CustomImageGrid>
-          <CustomImage src={`/beachimages/${beach.image1}`} alt="Beach" />
-            {/* <CustomImage src={`/beachimages/${beach.image2}`} alt="Beach" />
-            <CustomImage src={`/beachimages/${beach.image3}`} alt="Beach" />
-            <CustomImage src={`/beachimages/${beach.image4}`} alt="Beach" /> */}
-            {/* <CustomImage src={`/beachimages/${beach.image5}`} alt="Beach" /> */}
+          <CustomImage src={`/beachimages/${beach.image1}`} alt="Location" />
+            {/* <CustomImage src={`/beachimages/${beach.image2}`} alt="Location" />
+            <CustomImage src={`/beachimages/${beach.image3}`} alt="Location" />
+            <CustomImage src={`/beachimages/${beach.image4}`} alt="Location" /> */}
+            {/* <CustomImage src={`/beachimages/${beach.image5}`} alt="Location" /> */}
           </CustomImageGrid>
           <CardBody>
             <CustomText>Province: {beach.province}</CustomText>

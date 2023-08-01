@@ -6,6 +6,7 @@ const FooterContainer = styled.footer`
   color: #fff;
   padding: 20px;
   text-align: center;
+  margin-top: 10px;
 `;
 
 const FooterText = styled.p`

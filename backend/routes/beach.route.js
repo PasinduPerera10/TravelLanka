@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer'); // For handling image uploads
 const path = require('path');
-const Beach = require('../models/beach.model');
+const Location = require('../models/beach.model');
 
 // Multer configuration for image upload
 const storage = multer.diskStorage({
@@ -21,7 +21,7 @@ router.post('/beach/new', upload.fields([{ name: 'image1' }]), (req, res) => {
   const { title, description, province, district, category } = req.body;
   const image = req.file ? req.file.path : ''; // Use req.file to get the uploaded image path
 
-  const newBeach = new Beach({
+  const newBeach = new Location({
     title,
     description,
     province,
@@ -42,69 +42,69 @@ router.post('/beach/new', upload.fields([{ name: 'image1' }]), (req, res) => {
 
 // Route to get all beaches
 router.get('/beach/view', (req, res) => {
-  Beach.find()
+  Location.find()
     .then((beaches) => res.json(beaches))
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
 router.get('/beach/view1', (req, res) => {
-  Beach.find({category : "Beaches"})
+  Location.find({category : "Beaches"})
     .then((beaches) => res.json(beaches))
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
 router.get('/beach/view2', (req, res) => {
-  Beach.find({category : "Cultural and Historical"})
+  Location.find({category : "Cultural and Historical"})
     .then((beaches) => res.json(beaches))
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
 router.get('/beach/view3', (req, res) => {
-  Beach.find({category : "Wildlife and Nature"})
+  Location.find({category : "Wildlife and Nature"})
     .then((beaches) => res.json(beaches))
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
 router.get('/beach/view4', (req, res) => {
-  Beach.find({category : "Adventure and Trekking"})
+  Location.find({category : "Adventure and Trekking"})
     .then((beaches) => res.json(beaches))
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
 router.get('/beach/view5', (req, res) => {
-  Beach.find({category : "Ayurveda and Wellness"})
+  Location.find({category : "Ayurveda and Wellness"})
     .then((beaches) => res.json(beaches))
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
 router.get('/beach/view6', (req, res) => {
-  Beach.find({category : "Hill Country"})
+  Location.find({category : "Hill Country"})
     .then((beaches) => res.json(beaches))
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
 router.get('/beach/view7', (req, res) => {
-  Beach.find({category : "Cuisine"})
+  Location.find({category : "Cuisine"})
     .then((beaches) => res.json(beaches))
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
 router.get('/beach/view8', (req, res) => {
-  Beach.find({category : "Festivals and Events"})
+  Location.find({category : "Festivals and Events"})
     .then((beaches) => res.json(beaches))
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
 // Route to get a beach by ID
 router.get('/beach/view/:id', (req, res) => {
-  Beach.findById(req.params.id)
+  Location.findById(req.params.id)
     .then((beach) => res.json(beach))
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
 // Route to update a beach
 router.put('/beach/update/:id', upload.single('image'), (req, res) => {
-  Beach.findById(req.params.id)
+  Location.findById(req.params.id)
     .then((beach) => {
       beach.title = req.body.title;
       beach.description = req.body.description;
@@ -119,15 +119,15 @@ router.put('/beach/update/:id', upload.single('image'), (req, res) => {
 
       beach
         .save()
-        .then(() => res.json('Beach updated successfully'))
+        .then(() => res.json('Location updated successfully'))
         .catch((err) => res.status(400).json('Error: ' + err));
     })
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
 router.delete('/beach/delete/:id', (req, res) => {
-  Beach.findByIdAndRemove(req.params.id)
-    .then(() => res.json('Beach deleted successfully'))
+  Location.findByIdAndRemove(req.params.id)
+    .then(() => res.json('Location deleted successfully'))
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
