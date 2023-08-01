@@ -18,10 +18,8 @@ function HomeStack() {
         component={Home}
         options={{
           title: 'Home',
-<<<<<<< HEAD
           headerShown: false,
-=======
->>>>>>> e1d4d2bd8977af9826780dae1408e589601c901f
+
           headerStyle: {
             backgroundColor: '#f4511e',
           },
@@ -43,9 +41,8 @@ function ViewLocationsStack() {
         component={ViewLocations}
         options={{
           title: 'View Locations',
-<<<<<<< HEAD
+
           headerShown: false, // Hide the header for this screen
-=======
           headerStyle: {
             backgroundColor: '#f4511e',
           },
@@ -53,7 +50,6 @@ function ViewLocationsStack() {
           headerTitleStyle: {
             fontWeight: 'bold',
           },
->>>>>>> e1d4d2bd8977af9826780dae1408e589601c901f
         }}
       />
       <Stack.Screen
@@ -61,9 +57,8 @@ function ViewLocationsStack() {
         component={ViewLocation}
         options={{
           title: 'View Location',
-<<<<<<< HEAD
           headerShown: false, // Hide the header for this screen
-=======
+
           headerStyle: {
             backgroundColor: '#f4511e',
           },
@@ -71,7 +66,6 @@ function ViewLocationsStack() {
           headerTitleStyle: {
             fontWeight: 'bold',
           },
->>>>>>> e1d4d2bd8977af9826780dae1408e589601c901f
         }}
       />
     </Stack.Navigator>

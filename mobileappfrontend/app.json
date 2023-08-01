@@ -22,23 +22,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.pasindu2023.visitlanka"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-<<<<<<< HEAD
-        "projectId": "5983cec6-dded-43fb-aae3-c98559eeb8bb"
-      }
-    }
-=======
         "projectId": "3e6b7f31-8d98-4ff6-ae94-e30d9142bd44"
       }
     },
     "owner": "pasindu2023"
->>>>>>> e1d4d2bd8977af9826780dae1408e589601c901f
   }
 }
