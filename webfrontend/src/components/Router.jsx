@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AddBeach from './beachManagement/AddBeach';
-import UpdateBeach from './beachManagement/UpdateBeach';
+import AddLocation from './beachManagement/AddLocation';
+import UpdateLocation from './beachManagement/UpdateLocation';
 import ViewBeach from './beachManagement/ViewBeach';
 import ViewBeaches from './beachManagement/ViewBeaches';
 import Header from './Header';
@@ -23,11 +23,11 @@ function Router() {
         <Header/>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/addlocation" element={<AddBeach />} />
+          <Route path="/addlocation" element={<AddLocation />} />
           {/* Pass the match object to UpdateBeach */}
           <Route
             path="/updatelocation/:id"
-            element={<UpdateBeach/>}
+            element={<UpdateLocation/>}
           />
           {/* Update the Route for ViewBeach */}
           <Route
