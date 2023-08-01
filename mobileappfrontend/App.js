@@ -1,44 +1,85 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import ViewLocations from './components/ViewLocations'; // Correct path and default import
-import ViewLocation from './components/ViewLocation'; // Correct path and default import
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons'; // Import Ionicons from react-native-vector-icons
+import ViewLocations from './components/ViewLocations';
+import ViewLocation from './components/ViewLocation';
+import Home from './components/Home';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function HomeStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="HomeStack"
+        component={Home}
+        options={{
+          title: 'Home',
+          headerShown: false,
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function ViewLocationsStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="ViewLocationsStack"
+        component={ViewLocations}
+        options={{
+          title: 'View Locations',
+          headerShown: false, // Hide the header for this screen
+        }}
+      />
+      <Stack.Screen
+        name="ViewLocation"
+        component={ViewLocation}
+        options={{
+          title: 'View Location',
+          headerShown: false, // Hide the header for this screen
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="ViewLocations"
-          component={ViewLocations}a
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Home"
+          component={HomeStack}
           options={{
-            title: 'View Beaches', // Navigation bar title for this screen
-            headerStyle: {
-              backgroundColor: '#f4511e', // Customize header background color
-            },
-            headerTintColor: '#fff', // Customize header text color
-            headerTitleStyle: {
-              fontWeight: 'bold', // Customize header title style
-            },
+            tabBarLabel: 'Home',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="ios-home" size={size} color={color} />
+            ),
           }}
         />
-        <Stack.Screen
-          name="ViewLocation"
-          component={ViewLocation}
+        <Tab.Screen
+          name="View Locations"
+          component={ViewLocationsStack}
           options={{
-            title: 'View Location', // Navigation bar title for this screen
-            headerStyle: {
-              backgroundColor: '#f4511e', // Customize header background color
-            },
-            headerTintColor: '#fff', // Customize header text color
-            headerTitleStyle: {
-              fontWeight: 'bold', // Customize header title style
-            },
+            tabBarLabel: 'View Locations',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="ios-map" size={size} color={color} />
+            ),
           }}
         />
-      </Stack.Navigator>
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
