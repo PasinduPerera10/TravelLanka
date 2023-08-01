@@ -118,7 +118,7 @@ const ViewBeaches = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8060/beaches/beach/view')
+      .get('http://localhost:8060/beaches/location/view')
       .then((response) => {
         setBeaches(response.data);
         setLoading(false);
@@ -132,13 +132,13 @@ const ViewBeaches = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:8060/beaches/beach/delete/${id}`)
+      .delete(`http://localhost:8060/beaches/location/delete/${id}`)
       .then(() => {
-        setBeaches((prevBeaches) => prevBeaches.filter((beach) => beach._id !== id));
+        setBeaches((prevBeaches) => prevBeaches.filter((location) => location._id !== id));
         setError('');
       })
       .catch((error) => {
-        setError('Error deleting beach.');
+        setError('Error deleting location.');
       });
   };
 
@@ -161,24 +161,24 @@ const ViewBeaches = () => {
       <CardContainer>
         {error && <div>{error}</div>}
         {currentBeaches.length === 0 && <div>No beaches found</div>}
-        {currentBeaches.map((beach) => (
-          <CustomCard key={beach._id}>
-            <CustomCardTitle>{beach.title}</CustomCardTitle>
+        {currentBeaches.map((location) => (
+          <CustomCard key={location._id}>
+            <CustomCardTitle>{location.title}</CustomCardTitle>
             {/* Display the image1 */}
-            <CenteredImage variant="top" src={`/beachimages/${beach.image1}`} alt="Location" />
+            <CenteredImage variant="top" src={`/beachimages/${location.image1}`} alt="Location" />
             <Card.Body>
-              {/* <CenteredText>{beach.description}</CenteredText> */}
-              <CenteredText>Province: {beach.province}</CenteredText>
-              <CenteredText>District: {beach.district}</CenteredText>
-              <CenteredText>Category: {beach.category}</CenteredText>
+              {/* <CenteredText>{location.description}</CenteredText> */}
+              <CenteredText>Province: {location.province}</CenteredText>
+              <CenteredText>District: {location.district}</CenteredText>
+              <CenteredText>Category: {location.category}</CenteredText>
               <ButtonContainer>
-                <Link to={`/viewlocation/${beach._id}`}>
-                  <CustomButtonGreen variant={`button-${beach._id}`}>View Details</CustomButtonGreen>
+                <Link to={`/viewlocation/${location._id}`}>
+                  <CustomButtonGreen variant={`button-${location._id}`}>View Details</CustomButtonGreen>
                 </Link>
-                <Link to={`/updatelocation/${beach._id}`}>
-                  <CustomButtonYellow variant={`button-${beach._id}`}>Update</CustomButtonYellow>
+                <Link to={`/updatelocation/${location._id}`}>
+                  <CustomButtonYellow variant={`button-${location._id}`}>Update</CustomButtonYellow>
                 </Link>
-                <CustomButtonRed variant={`button-${beach._id}`} onClick={() => handleDelete(beach._id)}>
+                <CustomButtonRed variant={`button-${location._id}`} onClick={() => handleDelete(location._id)}>
                   Delete
                 </CustomButtonRed>
               </ButtonContainer>

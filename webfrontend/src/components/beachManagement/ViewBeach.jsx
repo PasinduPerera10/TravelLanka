@@ -5,13 +5,13 @@ import styled from 'styled-components';
 
 const ViewBeach = () => {
   const { id } = useParams();
-  const [beach, setBeach] = useState(null);
+  const [location, setBeach] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8060/beaches/beach/view/${id}`)
+      .get(`http://localhost:8060/beaches/location/view/${id}`)
       .then((response) => {
         setBeach(response.data);
         setLoading(false);
@@ -19,8 +19,8 @@ const ViewBeach = () => {
       })
       .catch((error) => {
         setLoading(false);
-        setError('Error while fetching beach details.');
-        console.error("Error while fetching beach details:", error);
+        setError('Error while fetching location details.');
+        console.error("Error while fetching location details:", error);
       });
   }, [id]);
 
@@ -32,30 +32,30 @@ const ViewBeach = () => {
     return <div>{error}</div>;
   }
 
-  if (!beach) {
+  if (!location) {
     return <div>Location not found</div>;
   }
 
-  // Generate a unique class name based on the beach ID
-  const cardClass = `unique-card-${beach.id}`;
+  // Generate a unique class name based on the location ID
+  const cardClass = `unique-card-${location.id}`;
 
   return (
     <CenteredDiv>
       <div>
         <CustomCard className={cardClass}>
-          <CustomCardTitle>{beach.title}</CustomCardTitle>
+          <CustomCardTitle>{location.title}</CustomCardTitle>
           <CustomImageGrid>
-          <CustomImage src={`/beachimages/${beach.image1}`} alt="Location" />
-            {/* <CustomImage src={`/beachimages/${beach.image2}`} alt="Location" />
-            <CustomImage src={`/beachimages/${beach.image3}`} alt="Location" />
-            <CustomImage src={`/beachimages/${beach.image4}`} alt="Location" /> */}
-            {/* <CustomImage src={`/beachimages/${beach.image5}`} alt="Location" /> */}
+          <CustomImage src={`/beachimages/${location.image1}`} alt="Location" />
+            {/* <CustomImage src={`/beachimages/${location.image2}`} alt="Location" />
+            <CustomImage src={`/beachimages/${location.image3}`} alt="Location" />
+            <CustomImage src={`/beachimages/${location.image4}`} alt="Location" /> */}
+            {/* <CustomImage src={`/beachimages/${location.image5}`} alt="Location" /> */}
           </CustomImageGrid>
           <CardBody>
-            <CustomText>Province: {beach.province}</CustomText>
-            <CustomText>District: {beach.district}</CustomText>
-            {/* <CustomText>Category: {beach.category}</CustomText> */}
-            <CustomText>{beach.description}</CustomText>
+            <CustomText>Province: {location.province}</CustomText>
+            <CustomText>District: {location.district}</CustomText>
+            {/* <CustomText>Category: {location.category}</CustomText> */}
+            <CustomText>{location.description}</CustomText>
           </CardBody>
         </CustomCard>
       </div>

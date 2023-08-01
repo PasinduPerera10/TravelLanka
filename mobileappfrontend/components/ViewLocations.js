@@ -11,7 +11,7 @@ const ViewLocations = () => {
 
   useEffect(() => {
     axios
-      .get('http://192.168.127.214:8060/beaches/beach/view')
+      .get('http://192.168.127.214:8060/beaches/location/view')
       .then((response) => {
         setBeaches(response.data);
         setLoading(false);
@@ -25,18 +25,14 @@ const ViewLocations = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://192.168.127.214:8060/beaches/beach/delete/${id}`)
+      .delete(`http://192.168.127.214:8060/beaches/location/delete/${id}`)
       .then(() => {
-        setBeaches((prevBeaches) => prevBeaches.filter((beach) => beach._id !== id));
+        setBeaches((prevBeaches) => prevBeaches.filter((location) => location._id !== id));
         setError('');
       })
       .catch((error) => {
-        setError('Error deleting beach.');
+        setError('Error deleting location.');
       });
-  };
-
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
   };
 
   if (loading) {
@@ -44,44 +40,87 @@ const ViewLocations = () => {
   }
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <View>
-        <Text>View Beaches</Text>
-        <View>
-          {error && <Text>{error}</Text>}
-          {beaches.length === 0 && <Text>No beaches found</Text>}
-          {beaches.map((beach) => (
-            <View key={beach._id}>
-              <Text>{beach.title}</Text>
-              {/* Display the image1 */}
-              <Image source={{ uri: `https://www.yovoyagin.com/uploads/0000/76/2022/04/05/galle-fort-main-1200x556.jpg` }} style={{ width: 200, height: 200 }} />
-              {/* <Image src={`/beachimages/${beach.image1}`} style={{ width: 200, height: 200 }} /> */}
-              <Text>Province: {beach.province}</Text>
-              <Text>District: {beach.district}</Text>
-              <Text>Category: {beach.category}</Text>
-              <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 10 }}>
-                <TouchableOpacity onPress={() => handleDelete(beach._id)}>
-                  <Button title="Delete" color="#d9534f" />
-                </TouchableOpacity>
-                <Button
-                  title="View"
-                  onPress={() =>
-                    navigation.navigate("ViewLocation", {
-                      id: beach._id,
-                    })
-                  }
-                />
-              </View>
+        <Text style={styles.title}>View Beaches</Text>
+        {error && <Text style={styles.error}>{error}</Text>}
+        {beaches.length === 0 && <Text style={styles.noDataText}>No beaches found</Text>}
+        {beaches.map((location) => (
+          <View key={location._id} style={styles.beachCard}>
+            <Text style={styles.beachTitle}>{location.title}</Text>
+            {/* Display the image1 */}
+            <Image source={{ uri: `https://www.yovoyagin.com/uploads/0000/76/2022/04/05/galle-fort-main-1200x556.jpg` }} style={styles.image} />
+            {/* <Image src={`/beachimages/${location.image1}`} style={styles.image} /> */}
+            <Text style={styles.detailsText}>Province: {location.province}</Text>
+            <Text style={styles.detailsText}>District: {location.district}</Text>
+            <Text style={styles.detailsText}>Category: {location.category}</Text>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("ViewLocation", { id: location._id })}
+                style={styles.button}
+              >
+                <Text style={styles.buttonText}>View</Text>
+              </TouchableOpacity>
             </View>
-          ))}
-        </View>
+          </View>
+        ))}
       </View>
     </ScrollView>
   );
 };
 
-// const styles = StyleSheet.create({
-//   // Your styles go here if needed
-// });
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  error: {
+    color: 'red',
+    marginBottom: 10,
+  },
+  noDataText: {
+    marginBottom: 10,
+  },
+  beachCard: {
+    marginBottom: 20,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 8,
+    padding: 10,
+  },
+  beachTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  image: {
+    width: '100%',
+    height: 200,
+    borderRadius: 8,
+    marginBottom: 10,
+  },
+  detailsText: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  button: {
+    backgroundColor: '#d9534f',
+    padding: 10,
+    borderRadius: 8,
+    width: '48%',
+  },
+  buttonText: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 16,
+  },
+});
 
 export default ViewLocations;

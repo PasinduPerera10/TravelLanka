@@ -43,7 +43,7 @@ const AddLocation = () => {
       // formData.append('image4', image4);
       // formData.append('image5', image5);
 
-      await axios.post('http://localhost:8060/beaches/beach/new', formData, {
+      await axios.post('http://localhost:8060/beaches/location/new', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -66,7 +66,7 @@ const AddLocation = () => {
       // You can perform any additional actions here after successful submission
       // For example, display a success notification or navigate to another page
     } catch (error) {
-      setErrorMessage('Error while adding beach.');
+      setErrorMessage('Error while adding location.');
       setSuccessMessage('');
     }
   };

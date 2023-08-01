@@ -11,11 +11,11 @@ const Map = () => {
   const [beaches, setBeaches] = useState([]);
 
   useEffect(() => {
-    // Fetch the beach data from the server
-    fetch('http://localhost:8060/beaches/beach/view')
+    // Fetch the location data from the server
+    fetch('http://localhost:8060/beaches/location/view')
       .then((response) => response.json())
       .then((data) => setBeaches(data))
-      .catch((error) => console.error('Error fetching beach data:', error));
+      .catch((error) => console.error('Error fetching location data:', error));
   }, []);
 
   return (
@@ -29,11 +29,11 @@ const Map = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-          {beaches.map((beach) => (
-  // Check if beach.province exists and has lat and lng properties
-  beach.province && beach.province.lat !== undefined && beach.province.lng !== undefined ? (
-    <Marker key={beach._id} position={[beach.province.lat, beach.province.lng]}>
-      <Popup>{beach.title}</Popup>
+          {beaches.map((location) => (
+  // Check if location.province exists and has lat and lng properties
+  location.province && location.province.lat !== undefined && location.province.lng !== undefined ? (
+    <Marker key={location._id} position={[location.province.lat, location.province.lng]}>
+      <Popup>{location.title}</Popup>
     </Marker>
   ) : null
 ))}

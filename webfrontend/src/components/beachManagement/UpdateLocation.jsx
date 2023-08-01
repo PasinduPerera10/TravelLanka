@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 const UpdateLocation = () => {
   const { id } = useParams();
-  const [beach, setBeach] = useState(null);
+  const [location, setBeach] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [province, setProvince] = useState('');
@@ -16,7 +16,7 @@ const UpdateLocation = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8060/beaches/beach/view/${id}`)
+      .get(`http://localhost:8060/beaches/location/view/${id}`)
       .then((response) => {
         setBeach(response.data);
         setTitle(response.data.title);
@@ -26,7 +26,7 @@ const UpdateLocation = () => {
         setCategory(response.data.category);
       })
       .catch((error) => {
-        setErrorMessage('Error while fetching beach details.');
+        setErrorMessage('Error while fetching location details.');
       });
   }, [id]);
 
@@ -71,7 +71,7 @@ const UpdateLocation = () => {
     }
 
     axios
-      .put(`http://localhost:8060/beaches/beach/update/${id}`, formData, {
+      .put(`http://localhost:8060/beaches/location/update/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -81,12 +81,12 @@ const UpdateLocation = () => {
         setErrorMessage('');
       })
       .catch((error) => {
-        setErrorMessage('Error while updating beach.');
+        setErrorMessage('Error while updating location.');
         setSuccessMessage('');
       });
   };
 
-  if (!beach) {
+  if (!location) {
     return <div>Loading...</div>;
   }
 

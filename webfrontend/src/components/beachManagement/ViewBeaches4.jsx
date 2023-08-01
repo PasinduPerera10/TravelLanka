@@ -92,7 +92,7 @@ const ViewBeaches4 = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8060/beaches/beach/view4')
+      .get('http://localhost:8060/beaches/location/view4')
       .then((response) => {
         setBeaches(response.data);
         setLoading(false);
@@ -122,19 +122,19 @@ const ViewBeaches4 = () => {
       <CardContainer>
         {error && <div>{error}</div>}
         {currentBeaches.length === 0 && <div>No beaches found</div>}
-        {currentBeaches.map((beach) => (
-          <CustomCard key={beach._id}>
-            <CustomCardTitle>{beach.title}</CustomCardTitle>
+        {currentBeaches.map((location) => (
+          <CustomCard key={location._id}>
+            <CustomCardTitle>{location.title}</CustomCardTitle>
             {/* Display the image1 */}
-            <CenteredImage variant="top" src={`/beachimages/${beach.image1}`} alt="Location" />
+            <CenteredImage variant="top" src={`/beachimages/${location.image1}`} alt="Location" />
             <Card.Body>
-              {/* <CenteredText>{beach.description}</CenteredText> */}
-              <CenteredText>Province: {beach.province}</CenteredText>
-              <CenteredText>District: {beach.district}</CenteredText>
-              {/* <CenteredText>Category: {beach.category}</CenteredText> */}
+              {/* <CenteredText>{location.description}</CenteredText> */}
+              <CenteredText>Province: {location.province}</CenteredText>
+              <CenteredText>District: {location.district}</CenteredText>
+              {/* <CenteredText>Category: {location.category}</CenteredText> */}
               <ButtonContainer>
-                <Link to={`/viewlocation/${beach._id}`}>
-                  <CustomButtonGreen variant={`button-${beach._id}`}>View Details</CustomButtonGreen>
+                <Link to={`/viewlocation/${location._id}`}>
+                  <CustomButtonGreen variant={`button-${location._id}`}>View Details</CustomButtonGreen>
                 </Link>
               </ButtonContainer>
             </Card.Body>
