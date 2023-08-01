@@ -6,12 +6,10 @@ const ViewLocations = () => {
   const [beaches, setBeaches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(8);
 
   useEffect(() => {
     axios
-      .get('http://localhost:8060/beaches/beach/view')
+      .get('http://192.168.127.214:8060/beaches/beach/view')
       .then((response) => {
         setBeaches(response.data);
         setLoading(false);
@@ -39,11 +37,6 @@ const ViewLocations = () => {
     setCurrentPage(pageNumber);
   };
 
-  // Get the current items based on pagination
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentBeaches = beaches.slice(indexOfFirstItem, indexOfLastItem);
-
   if (loading) {
     return <Text>Loading...</Text>;
   }
@@ -54,8 +47,8 @@ const ViewLocations = () => {
         <Text>View Beaches</Text>
         <View>
           {error && <Text>{error}</Text>}
-          {currentBeaches.length === 0 && <Text>No beaches found</Text>}
-          {currentBeaches.map((beach) => (
+          {beaches.length === 0 && <Text>No beaches found</Text>}
+          {beaches.map((beach) => (
             <View key={beach._id}>
               <Text>{beach.title}</Text>
               {/* Display the image1 */}
@@ -76,8 +69,8 @@ const ViewLocations = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  // Your styles go here if needed
-});
+// const styles = StyleSheet.create({
+//   // Your styles go here if needed
+// });
 
 export default ViewLocations;

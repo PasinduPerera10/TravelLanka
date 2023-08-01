@@ -7,7 +7,7 @@ const Location = require('../models/location.model');
 // Multer configuration for image upload
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../webfrontend/public/beachimages');
+    cb(null, '../backend/beachimages');
   },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
