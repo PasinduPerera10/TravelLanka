@@ -6,7 +6,7 @@ import { useRoute } from '@react-navigation/native';
 const ViewLocation = () => {
   const route = useRoute();
   const id = route.params.id;
-  const [location, setBeach] = useState(null);
+  const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -20,7 +20,7 @@ const ViewLocation = () => {
     axios
       .get(`http://192.168.127.214:8060/beaches/location/view/${id}`)
       .then((response) => {
-        setBeach(response.data);
+        setLocation(response.data);
         setLoading(false);
         setError('');
       })

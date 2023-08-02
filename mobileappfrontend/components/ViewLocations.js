@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 
 const ViewLocations = () => {
-  const [beaches, setBeaches] = useState([]);
+  const [beaches, setLocationes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const navigation = useNavigation();
@@ -13,7 +13,7 @@ const ViewLocations = () => {
     axios
       .get('http://192.168.127.214:8060/beaches/location/view')
       .then((response) => {
-        setBeaches(response.data);
+        setLocationes(response.data);
         setLoading(false);
         setError('');
       })
@@ -27,7 +27,7 @@ const ViewLocations = () => {
     axios
       .delete(`http://192.168.127.214:8060/beaches/location/delete/${id}`)
       .then(() => {
-        setBeaches((prevBeaches) => prevBeaches.filter((location) => location._id !== id));
+        setLocationes((prevLocationes) => prevLocationes.filter((location) => location._id !== id));
         setError('');
       })
       .catch((error) => {
@@ -42,7 +42,7 @@ const ViewLocations = () => {
   return (
     <ScrollView style={styles.container}>
       <View>
-        <Text style={styles.title}>View Beaches</Text>
+        {/* <Text style={styles.title}>View Locations</Text> */}
         {error && <Text style={styles.error}>{error}</Text>}
         {beaches.length === 0 && <Text style={styles.noDataText}>No beaches found</Text>}
         {beaches.map((location) => (
