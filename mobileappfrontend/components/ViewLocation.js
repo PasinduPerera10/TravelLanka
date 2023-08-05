@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Image, StyleSheet } from 'react-native';
+import { useRoute, useNavigation } from '@react-navigation/native'; // Import useNavigation
 import axios from 'axios';
-import { useRoute } from '@react-navigation/native';
 
 const ViewLocation = () => {
   const route = useRoute();
   const id = route.params.id;
+  const navigation = useNavigation(); // Get the navigation object
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -18,7 +19,7 @@ const ViewLocation = () => {
     }
 
     axios
-      .get(`http://192.168.127.214:8060/beaches/location/view/${id}`)
+      .get(`http://192.168.209.214:8060/beaches/location/view/${id}`)
       .then((response) => {
         setLocation(response.data);
         setLoading(false);
@@ -45,6 +46,10 @@ const ViewLocation = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      {/* Add the back button */}
+      <Text style={styles.backButton} onPress={() => navigation.goBack()}>
+        {'< Back'}
+      </Text>
       <View style={styles.card}>
         <Text style={styles.title}>{location.title}</Text>
         <Image
@@ -111,6 +116,11 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 18,
     color: 'red',
+    marginBottom: 10,
+  },
+  backButton: {
+    fontSize: 18,
+    color: '#007BFF', // Set a color for the back button
     marginBottom: 10,
   },
 });

@@ -11,7 +11,7 @@ const ViewLocations = () => {
 
   useEffect(() => {
     axios
-      .get('http://192.168.127.214:8060/beaches/location/view')
+      .get('http://192.168.209.214:8060/beaches/location/view')
       .then((response) => {
         setLocationes(response.data);
         setLoading(false);
@@ -51,6 +51,12 @@ const ViewLocations = () => {
             {/* Display the image1 */}
             <Image source={{ uri: `https://www.yovoyagin.com/uploads/0000/76/2022/04/05/galle-fort-main-1200x556.jpg` }} style={styles.image} />
             {/* <Image src={`/beachimages/${location.image1}`} style={styles.image} /> */}
+            <Image
+                style={styles.image}
+                source={{
+                  uri: `http://172.28.19.253:8000/webfrontend/public/beachimages/${location.image1}`,
+                }}
+              />
             <Text style={styles.detailsText}>Province: {location.province}</Text>
             <Text style={styles.detailsText}>District: {location.district}</Text>
             <Text style={styles.detailsText}>Category: {location.category}</Text>

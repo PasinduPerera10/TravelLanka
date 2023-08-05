@@ -1,5 +1,9 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet, Image } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Image, Dimensions } from 'react-native';
+
+const { width } = Dimensions.get('window');
+const imageHeight = 200;
+const imageWidth = width;
 
 const Home = () => {
   return (
@@ -8,7 +12,7 @@ const Home = () => {
       <View style={styles.hero}>
         <Image
           source={{ uri: `https://www.yovoyagin.com/uploads/0000/76/2022/04/05/galle-fort-main-1200x556.jpg` }}
-          style={styles.image}
+          style={[styles.image, { height: imageHeight, width: imageWidth }]}
         />
         <View style={styles.heroContent}>
           <Text style={styles.heroTitle}>Welcome to VisitLanka</Text>
@@ -76,11 +80,11 @@ const styles = StyleSheet.create({
   },
   hero: {
     backgroundColor: '#f4511e',
-    paddingVertical: 40,
     marginBottom: 20,
   },
   heroContent: {
     alignItems: 'center',
+    marginTop: 120,
   },
   heroTitle: {
     fontSize: 24,

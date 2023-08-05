@@ -12,7 +12,7 @@ const Map = () => {
 
   useEffect(() => {
     // Fetch the location data from the server
-    fetch('https://visitlanka-backend.onrender.com/beaches/location/view')
+    fetch('http://localhost:8060/beaches/location/view')
       .then((response) => response.json())
       .then((data) => setBeaches(data))
       .catch((error) => console.error('Error fetching location data:', error));
