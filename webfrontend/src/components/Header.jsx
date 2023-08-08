@@ -40,8 +40,8 @@ const Header = () => {
         <NavLink to="/view3">Wildlife and Nature</NavLink>
         <NavLink to="/view4">Adventure and Trekking</NavLink>
         <NavLink to="/view5">Ayurveda and Wellness</NavLink>
-        <NavLink to="/view6">Hill Country</NavLink>
-        <NavLink to="/view7">Cuisine</NavLink>
+        {/* <NavLink to="/view6">Hill Country</NavLink>
+        <NavLink to="/view7">Cuisine</NavLink> */}
         <NavLink to="/view8">Festivals and Events</NavLink>
       </NavLinks>
     </HeaderContainer>
