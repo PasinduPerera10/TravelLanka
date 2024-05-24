@@ -92,7 +92,7 @@ const ViewBeaches3 = () => {
 
   useEffect(() => {
     axios
-      .get('https://visitlanka-60b4.onrender.com/beaches/location/view3')
+      .get('https://visitlanka-backend.onrender.com/beaches/location/view3')
       .then((response) => {
         setBeaches(response.data);
         setLoading(false);
@@ -125,7 +125,6 @@ const ViewBeaches3 = () => {
         {currentBeaches.map((location) => (
           <CustomCard key={location._id}>
             <CustomCardTitle>{location.title}</CustomCardTitle>
-            {/* Display the image1 */}
             <CenteredImage variant="top" src={`/beachimages/${location.image1}`} alt="Location" />
             <Card.Body>
               {/* <CenteredText>{location.description}</CenteredText> */}
