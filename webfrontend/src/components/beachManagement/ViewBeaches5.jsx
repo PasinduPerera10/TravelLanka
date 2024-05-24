@@ -92,7 +92,7 @@ const ViewBeaches5 = () => {
 
   useEffect(() => {
     axios
-      .get('https://visitlanka-backend.onrender.com/beaches/location/view5')
+      .get('https://visitlanka-60b4.onrender.com/beaches/location/view5')
       .then((response) => {
         setBeaches(response.data);
         setLoading(false);
