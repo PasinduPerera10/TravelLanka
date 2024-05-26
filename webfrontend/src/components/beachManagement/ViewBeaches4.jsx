@@ -126,7 +126,15 @@ const ViewBeaches4 = () => {
           <CustomCard key={location._id}>
             <CustomCardTitle>{location.title}</CustomCardTitle>
             {/* Display the image1 */}
-            <CenteredImage variant="top" src={`/beachimages/${location.image1}`} alt="Location" />
+            <CenteredImage
+              variant="top"
+              src={
+                location.image1.startsWith('data:image')
+                  ? location.image1
+                  : `/beachimages/${location.image1}`
+              }
+              alt="Location"
+            />
             <Card.Body>
               {/* <CenteredText>{location.description}</CenteredText> */}
               <CenteredText>Province: {location.province}</CenteredText>

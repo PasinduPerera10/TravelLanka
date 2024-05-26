@@ -45,7 +45,15 @@ const ViewBeach = () => {
         <CustomCard className={cardClass}>
           <CustomCardTitle>{location.title}</CustomCardTitle>
           <CustomImageGrid>
-          <CustomImage src={`/beachimages/${location.image1}`} alt="Location" />
+          <CustomImage
+              variant="top"
+              src={
+                location.image1.startsWith('data:image')
+                  ? location.image1
+                  : `/beachimages/${location.image1}`
+              }
+              alt="Location"
+            />
             {/* <CustomImage src={`/beachimages/${location.image2}`} alt="Location" />
             <CustomImage src={`/beachimages/${location.image3}`} alt="Location" />
             <CustomImage src={`/beachimages/${location.image4}`} alt="Location" /> */}
